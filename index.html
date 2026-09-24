@@ -1,1 +1,24 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Keyboard Forensics</title><link rel="stylesheet" href="styles.css"></head><body><main><header><div><small>LOCAL VIDEO FORENSICS</small><h1>Keyboard Forensics</h1><p>Analyze a screen recording for visual and audio evidence of keyboard activity.</p></div><b>Runs locally</b></header><section id="drop" class="card upload"><input id="file" type="file" accept="video/*" hidden><button id="choose">Choose video</button><p>or drag and drop a screen recording here</p><small>The recording stays in your browser.</small></section><section id="work" class="card hidden"><video id="video" controls playsinline></video><div class="controls"><label>Sampling<select id="rate"><option value="2">2 fps</option><option value="5" selected>5 fps</option><option value="10">10 fps</option></select></label><button id="analyze">Analyze</button><button id="stop">Stop</button></div><div class="progress"><i id="bar"></i></div><p id="status">Ready.</p><div class="stats"><span><strong id="duration">—</strong>duration</span><span><strong id="frames">—</strong>frames</span><span><strong id="count">—</strong>events</span></div><div class="head"><h2>Evidence timeline</h2><div><button id="json">JSON</button><button id="csv">CSV</button></div></div><div id="results"><p class="empty">Run an analysis.</p></div></section><section class="card"><h2>Important limitation</h2><p>A screen recording normally does not contain the Chromebook's raw keyboard event log. This app can flag evidence such as abrupt visual changes and audio transients, but it cannot reliably name a keypress that left no evidence in the recording.</p></section></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Keyboard Forensics</title><link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body><main>
+<header><div><small>LOCAL VIDEO FORENSICS</small><h1>Keyboard Forensics</h1><p>Infer individual keystrokes from visible text changes and other evidence in a screen recording.</p></div><b>Runs locally</b></header>
+<section id="drop" class="card upload"><input id="file" type="file" accept="video/*" hidden><button id="choose">Choose video</button><p>or drag and drop a screen recording here</p><small>The recording stays in your browser.</small></section>
+<section id="work" class="card hidden"><video id="video" controls playsinline></video>
+<div class="controls">
+<label>Sampling<select id="rate"><option value="1">1 fps</option><option value="2" selected>2 fps</option><option value="5">5 fps</option></select></label>
+<label>Key detection<select id="mode"><option value="smart" selected>Smart: OCR + visual + audio</option><option value="ocr">OCR text changes</option><option value="visual">Visual evidence only</option></select></label>
+<button id="analyze">Analyze</button><button id="stop">Stop</button>
+</div>
+<p class="hint">For individual keys, OCR works best when the typed characters are visible on screen. Use 1–2 fps for OCR.</p>
+<div class="progress"><i id="bar"></i></div><p id="status">Ready.</p>
+<div class="stats"><span><strong id="duration">—</strong>duration</span><span><strong id="frames">—</strong>frames</span><span><strong id="count">—</strong>events</span></div>
+<div class="head"><h2>Evidence timeline</h2><div><button id="json">JSON</button><button id="csv">CSV</button></div></div>
+<div id="results"><p class="empty">Run an analysis.</p></div></section>
+<section class="card"><h2>What can be recovered?</h2><p><b>Named keys:</b> when a visible text field changes, the app compares OCR text between frames and can report characters such as <code>A</code>, <code>7</code>, or <code>?</code>, plus inferred Backspace/Enter in some cases.</p>
+<p><b>Supporting evidence:</b> frame changes and audio transients can mark likely typing moments.</p>
+<p><b>Limit:</b> if the pressed key leaves no observable evidence in the recording, no website can reliably reconstruct the original keyboard event from the video alone. Results are inferences, not a hidden Chromebook key log.</p></section>
+</main><script src="app.js"></script></body></html>
