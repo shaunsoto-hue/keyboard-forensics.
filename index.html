@@ -15,10 +15,10 @@
 </div>
 <p class="hint">For individual keys, OCR works best when the typed characters are visible on screen. Use 1–2 fps for OCR.</p>
 <div class="progress"><i id="bar"></i></div><p id="status">Ready.</p>
-<div class="stats"><span><strong id="duration">—</strong>duration</span><span><strong id="frames">—</strong>frames</span><span><strong id="count">—</strong>events</span></div>
+<div class="stats"><span><strong id="duration">—</strong>duration</span><span><strong id="frames">—</strong>frames</span><span><strong id="count">—</strong>events</span><span><strong id="resolution">—</strong>resolution</span></div>
 <div class="head"><h2>Evidence timeline</h2><div><button id="json">JSON</button><button id="csv">CSV</button></div></div>
 <div id="results"><p class="empty">Run an analysis.</p></div></section>
 <section class="card"><h2>What can be recovered?</h2><p><b>Named keys:</b> when a visible text field changes, the app compares OCR text between frames and can report characters such as <code>A</code>, <code>7</code>, or <code>?</code>, plus inferred Backspace/Enter in some cases.</p>
-<p><b>Supporting evidence:</b> frame changes and audio transients can mark likely typing moments.</p>
+<p><b>Action timeline:</b> the analyzer looks for visible text edits, masked-password character changes, backspaces, screen/UI changes, and keyboard-like audio transients. It also records basic video metadata such as duration, dimensions, and file type.</p>
 <p><b>Limit:</b> if the pressed key leaves no observable evidence in the recording, no website can reliably reconstruct the original keyboard event from the video alone. Results are inferences, not a hidden Chromebook key log.</p></section>
 </main><script src="app.js"></script></body></html>
